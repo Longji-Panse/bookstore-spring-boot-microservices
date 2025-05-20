@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// just a comment to update my gi push and trigger an action
+
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
