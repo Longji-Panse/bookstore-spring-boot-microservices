@@ -42,7 +42,11 @@
                         </goals>
                     </execution>
                 </executions>
-
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.5</version> <!-- Or whatever Spring Boot version you're using -->
             </plugin>
         </plugins>
     </build>
