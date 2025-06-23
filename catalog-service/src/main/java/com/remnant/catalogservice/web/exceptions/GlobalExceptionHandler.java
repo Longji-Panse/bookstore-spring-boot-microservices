@@ -1,4 +1,4 @@
-package com.remnant.catalogservice.web.exception;
+package com.remnant.catalogservice.web.exceptions;
 
 import com.remnant.catalogservice.domain.ProductNotFoundException;
 import java.net.URI;

@@ -1,0 +1,31 @@
+package com.remnant.orderservice;
+
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
+
+@SpringBootApplication
+@ConfigurationPropertiesScan
+@EnableConfigurationProperties(ApplicationProperties.class)
+public class OrderServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(OrderServiceApplication.class, args);
+	}
+
+//	@Bean
+//	CommandLineRunner commandLineRunner(Environment env) {
+//		return args -> {
+//			System.out.println("RabbitMQ Host: " + env.getProperty("spring.rabbitmq.host"));
+//			System.out.println("RabbitMQ Port: " + env.getProperty("spring.rabbitmq.port"));
+//			System.out.println("RabbitMQ Username: " + env.getProperty("spring.rabbitmq.username"));
+//			System.out.println("RabbitMQ Virtual Host: " + env.getProperty("spring.rabbitmq.virtual-host"));
+//		};
+//	}
+
+}
