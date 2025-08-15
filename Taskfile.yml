@@ -77,4 +77,9 @@ tasks:
     vars:
       DURATION: '{{default 5 .DURATION}}'
     cmds:
-      - sleep {{.DURATION}}
+      - |
+        {{if eq OS "windows"}}
+          timeout /T {{.DURATION}} /NOBREAK
+        {{else}}
+          sleep {{.DURATION}}
+        {{end}}

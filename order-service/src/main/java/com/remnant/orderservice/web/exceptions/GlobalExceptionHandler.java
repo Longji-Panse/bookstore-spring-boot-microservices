@@ -1,5 +1,6 @@
 package com.remnant.orderservice.web.exceptions;
 
+import com.remnant.orderservice.domain.InvalidOrderException;
 import com.remnant.orderservice.domain.OrderNotFoundException;
 import jakarta.annotation.Nullable;
 import org.springframework.http.*;
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setTitle("Internal Server Error");
         problemDetail.setType(ISE_FOUND_TYPE);
         problemDetail.setProperty("service", SERVICE_NAME);
-        problemDetail.setProperty("error-category", "generic");
+        problemDetail.setProperty("error-category", "Generic");
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }
@@ -38,7 +39,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setTitle("Order Not Found");
         problemDetail.setType(NOT_FOUND_TYPE);
         problemDetail.setProperty("service", SERVICE_NAME);
-        problemDetail.setProperty("error-category", "generic");
+        problemDetail.setProperty("error-category", "Generic");
+        problemDetail.setProperty("timestamp", Instant.now());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(InvalidOrderException.class)
+    public ProblemDetail handleInvalidOrderException(InvalidOrderException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+        problemDetail.setTitle("Invalid Order Creation Request");
+        problemDetail.setType(BAD_REQUEST_TYPE);
+        problemDetail.setProperty("service", SERVICE_NAME);
+        problemDetail.setProperty("error-category", "Generic");
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }

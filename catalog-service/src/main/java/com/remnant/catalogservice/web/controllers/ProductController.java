@@ -23,9 +23,12 @@ public class ProductController {
 
     @GetMapping("/{code}")
     ResponseEntity<ProductDto> getProductByCode(@PathVariable("code") String code) {
+
         return productService
                 .getProductByCode(code)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> ProductNotFoundException.forCode(code));
     }
+
+   
 }

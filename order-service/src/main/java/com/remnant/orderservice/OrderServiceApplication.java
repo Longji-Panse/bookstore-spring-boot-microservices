@@ -1,5 +1,6 @@
 package com.remnant.orderservice;
 
+import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,10 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @EnableConfigurationProperties(ApplicationProperties.class)
+@EnableScheduling
+@EnableSchedulerLock(defaultLockAtMostFor = "10m")
 public class OrderServiceApplication {
 
 	public static void main(String[] args) {

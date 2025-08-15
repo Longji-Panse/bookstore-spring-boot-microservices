@@ -1,7 +1,7 @@
 name: 'bookstore-springboot-microservices'
 services:
   catalog-db:
-    image: postgres:latest
+    image: postgres:17
     container_name: catalog-db
     environment:
       - POSTGRES_USER=postgres
@@ -22,7 +22,7 @@ services:
       - catalog_db_data:/var/lib/postgresql/data
 
   orders-db:
-    image: postgres:latest
+    image: postgres:17
     container_name: orders-db
     environment:
       - POSTGRES_USER=postgres
