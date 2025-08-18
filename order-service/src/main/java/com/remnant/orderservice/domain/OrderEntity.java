@@ -4,23 +4,20 @@ import com.remnant.orderservice.domain.models.Address;
 import com.remnant.orderservice.domain.models.Customer;
 import com.remnant.orderservice.domain.models.OrderStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Set;
-
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
-
 class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
-    @SequenceGenerator(name = "order_id_generator",sequenceName = "order_id_seq")
+    @SequenceGenerator(name = "order_id_generator", sequenceName = "order_id_seq")
     private Long id;
 
     @Column(nullable = false)
@@ -35,17 +32,17 @@ class OrderEntity {
     @Embedded
     @AttributeOverrides(
             value = {
-                    @AttributeOverride(name = "name", column = @Column(name = "customer_name")),
-                    @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
-                    @AttributeOverride(name = "phone", column = @Column(name = "customer_phone"))
+                @AttributeOverride(name = "name", column = @Column(name = "customer_name")),
+                @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
+                @AttributeOverride(name = "phone", column = @Column(name = "customer_phone"))
             })
     private Customer customer;
 
     @Embedded
     @AttributeOverrides(
             value = {
-                    @AttributeOverride(name = "deliveryAddress", column = @Column(name = "delivery_address")),
-                    @AttributeOverride(name = "deliveryCountry", column = @Column(name = "delivery_country"))
+                @AttributeOverride(name = "deliveryAddress", column = @Column(name = "delivery_address")),
+                @AttributeOverride(name = "deliveryCountry", column = @Column(name = "delivery_country"))
             })
     private Address deliveryAddress;
 
@@ -59,6 +56,4 @@ class OrderEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
 }

@@ -25,27 +25,43 @@ public class OrderEventPublisher {
             send(properties.newOrdersQueue(), event);
             logger.info("Successfully published OrderCreatedEvent for order: {}", event.orderNumber());
         } catch (Exception e) {
-            logger.error("Failed to publish OrderCreatedEvent for order: {}. Error: {}", event.orderNumber(), e.getMessage(), e);
+            logger.error(
+                    "Failed to publish OrderCreatedEvent for order: {}. Error: {}",
+                    event.orderNumber(),
+                    e.getMessage(),
+                    e);
             throw e; // Or handle differently, e.g., move to error queue
         }
     }
+
     public void publish(OrderDeliveredEvent event) {
         try {
-            logger.info("Publishing OrderDeliveredEvent to queue: {}, event: {}", properties.deliveredOrdersQueue(), event);
+            logger.info(
+                    "Publishing OrderDeliveredEvent to queue: {}, event: {}", properties.deliveredOrdersQueue(), event);
             send(properties.deliveredOrdersQueue(), event);
             logger.info("Successfully published OrderDeliveredEvent for order: {}", event.orderNumber());
         } catch (Exception e) {
-            logger.error("Failed to publish OrderDeliveredEvent for order: {}. Error: {}", event.orderNumber(), e.getMessage(), e);
+            logger.error(
+                    "Failed to publish OrderDeliveredEvent for order: {}. Error: {}",
+                    event.orderNumber(),
+                    e.getMessage(),
+                    e);
             throw e; // Or handle differently, e.g., move to error queue
         }
     }
+
     public void publish(OrderCancelledEvent event) {
         try {
-            logger.info("Publishing OrderCancelledEvent to queue: {}, event: {}", properties.cancelledOrdersQueue(), event);
+            logger.info(
+                    "Publishing OrderCancelledEvent to queue: {}, event: {}", properties.cancelledOrdersQueue(), event);
             send(properties.cancelledOrdersQueue(), event);
             logger.info("Successfully published OrderCancelledEvent for order: {}", event.orderNumber());
         } catch (Exception e) {
-            logger.error("Failed to publish OrderCancelledEvent for order: {}. Error: {}", event.orderNumber(), e.getMessage(), e);
+            logger.error(
+                    "Failed to publish OrderCancelledEvent for order: {}. Error: {}",
+                    event.orderNumber(),
+                    e.getMessage(),
+                    e);
             throw e; // Or handle differently, e.g., move to error queue
         }
     }
@@ -56,14 +72,16 @@ public class OrderEventPublisher {
             send(properties.errorOrdersQueue(), event);
             logger.info("Successfully published OrderErrorEvent for order: {}", event.orderNumber());
         } catch (Exception e) {
-            logger.error("Failed to publish OrderErrorEvent for order: {}. Error: {}", event.orderNumber(), e.getMessage(), e);
+            logger.error(
+                    "Failed to publish OrderErrorEvent for order: {}. Error: {}",
+                    event.orderNumber(),
+                    e.getMessage(),
+                    e);
             throw e; // Or handle differently, e.g., move to error queue
         }
     }
 
-    private void send(String routingKey, Object payload){
-        rabbitTemplate.convertAndSend(properties.orderEventsExchange(),routingKey, payload);
+    private void send(String routingKey, Object payload) {
+        rabbitTemplate.convertAndSend(properties.orderEventsExchange(), routingKey, payload);
     }
-
-
 }

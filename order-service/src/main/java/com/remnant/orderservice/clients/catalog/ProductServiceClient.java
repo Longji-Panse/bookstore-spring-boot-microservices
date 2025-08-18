@@ -2,13 +2,12 @@ package com.remnant.orderservice.clients.catalog;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -18,18 +17,15 @@ public class ProductServiceClient {
 
     @CircuitBreaker(name = "catalog-service")
     @Retry(name = "catalog-service", fallbackMethod = "getProductByCOdeFallBack")
-    public Optional<ProductDto> getProductByCode(String code){
+    public Optional<ProductDto> getProductByCode(String code) {
         log.info("Fetching product by code: {}", code);
 
-            var product = restClient
-                    .get()
-                    .uri("/api/products/{code}", code)
-                    .retrieve()
-                    .body(ProductDto.class);
-            return Optional.ofNullable(product);
+        var product =
+                restClient.get().uri("/api/products/{code}", code).retrieve().body(ProductDto.class);
+        return Optional.ofNullable(product);
     }
 
-    Optional<ProductDto> getProductByCOdeFallBack(String code, Throwable t){
+    Optional<ProductDto> getProductByCOdeFallBack(String code, Throwable t) {
         log.info("Could not fetch product by code: {}", code);
         return Optional.empty();
     }

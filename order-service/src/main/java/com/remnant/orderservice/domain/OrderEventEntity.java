@@ -2,16 +2,14 @@ package com.remnant.orderservice.domain;
 
 import com.remnant.orderservice.domain.models.OrderEventType;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_events")
 @Getter
 @Setter
-
 public class OrderEventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_event_id_generator")
@@ -30,8 +28,8 @@ public class OrderEventEntity {
     @Column(nullable = false)
     private String payload;
 
-    @Column(name= "created_at",nullable = false, updatable = false)
-    private LocalDateTime createdAt =  LocalDateTime.now();
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

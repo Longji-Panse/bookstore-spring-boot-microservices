@@ -1,6 +1,5 @@
 package com.remnant.orderservice.domain.models;
 
-
 import jakarta.validation.constraints.NotBlank;
 
 public record Address(

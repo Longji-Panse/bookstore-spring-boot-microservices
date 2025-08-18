@@ -1,22 +1,21 @@
 package com.remnant.orderservice.web.controllers;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.notNullValue;
+
 import com.remnant.orderservice.AbstractIT;
 import io.restassured.http.ContentType;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import java.math.BigDecimal;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.notNullValue;
-
 public class OrderControllerTest extends AbstractIT {
 
     @Nested
-    class CreateOrderTests{
+    class CreateOrderTests {
         @Test
-        void shouldCreateOrder(){
+        void shouldCreateOrder() {
             mockGetByProductCode("P100", "product", new BigDecimal("25.50"));
             var payload =
                     """
@@ -50,7 +49,7 @@ public class OrderControllerTest extends AbstractIT {
         }
 
         @Test
-        void shouldReturnBadRequest(){
+        void shouldReturnBadRequest() {
             var payload =
                     """
                             {

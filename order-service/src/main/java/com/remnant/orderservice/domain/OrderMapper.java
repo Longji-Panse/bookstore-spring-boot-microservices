@@ -3,7 +3,6 @@ package com.remnant.orderservice.domain;
 import com.remnant.orderservice.domain.models.CreateOrderRequest;
 import com.remnant.orderservice.domain.models.OrderItem;
 import com.remnant.orderservice.domain.models.OrderStatus;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -17,7 +16,7 @@ public class OrderMapper {
         newOrder.setCustomer(request.customer());
         newOrder.setDeliveryAddress(request.deliveryAddress());
         Set<OrderItemEntity> orderItems = new HashSet<>();
-        for(OrderItem item : request.items()){
+        for (OrderItem item : request.items()) {
             OrderItemEntity orderItem = new OrderItemEntity();
             orderItem.setCode(item.code());
             orderItem.setQuantity(item.quantity());
