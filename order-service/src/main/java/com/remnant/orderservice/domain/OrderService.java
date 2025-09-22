@@ -1,10 +1,8 @@
 package com.remnant.orderservice.domain;
 
-import com.remnant.orderservice.domain.models.CreateOrderRequest;
-import com.remnant.orderservice.domain.models.CreateOrderResponse;
-import com.remnant.orderservice.domain.models.OrderCreatedEvent;
-import com.remnant.orderservice.domain.models.OrderStatus;
+import com.remnant.orderservice.domain.models.*;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,5 +71,15 @@ public class OrderService {
     private boolean canBeDelivered(OrderEntity order) {
         return DELIVERY_ALLOWED_COUNTRIES.contains(
                 order.getDeliveryAddress().deliveryCountry().toUpperCase());
+    }
+
+    public List<OrderSummary> findOrdersByUserName(String username) {
+        return orderRepository.findByUserName(username);
+    }
+
+    public Optional<OrderDTO> findUserOrder(String username, String orderNumber) {
+        return orderRepository
+                .findByUserNameAndOrderNumber(username, orderNumber)
+                .map(OrderMapper::convertToDTO);
     }
 }

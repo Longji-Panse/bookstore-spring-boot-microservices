@@ -26,3 +26,4 @@ create table order_items(
     primary key (id),
     order_id bigint not null references orders (id)
 );
+

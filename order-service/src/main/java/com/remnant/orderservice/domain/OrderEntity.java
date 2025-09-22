@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "orders")
 @Getter
 @Setter
-class OrderEntity {
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
