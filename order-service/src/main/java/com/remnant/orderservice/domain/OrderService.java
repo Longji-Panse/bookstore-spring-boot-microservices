@@ -38,6 +38,7 @@ public class OrderService {
         return new CreateOrderResponse(savedOrder.getOrderNumber());
     }
 
+    @Transactional
     public void processNewOrders() {
         List<OrderEntity> orders = orderRepository.findByStatus(OrderStatus.NEW);
         log.info("Found {} Orders for processing", orders.size());

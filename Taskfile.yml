@@ -30,6 +30,22 @@ tasks:
       - "{{.MVNW}} -pl catalog-service spring-boot:build-image -DskipTests"
       - "{{.MVNW}} -pl order-service spring-boot:build-image -DskipTests"
 
+    # 🎯 Build only order-service
+  build-order:
+      desc: "Build only order-service"
+      deps: [format]
+      cmds:
+        - "{{.MVNW}} clean package -pl order-service -am -DskipTests"
+        - "{{.MVNW}} -pl order-service spring-boot:build-image -DskipTests"
+
+    # 🎯 Build only catalog-service
+  build-catalog:
+      desc: "Build only catalog-service"
+      deps: [format]
+      cmds:
+        - "{{.MVNW}} clean package -pl catalog-service -am -DskipTests"
+        - "{{.MVNW}} -pl catalog-service spring-boot:build-image -DskipTests"
+
   start_infra:
     desc: "Start Docker Compose infrastructure services"
     cmds:
@@ -55,11 +71,22 @@ tasks:
       - task: stop
       - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} up -d"
 
+  # Bring up infra + app containers
+  up:
+    cmds:
+      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} up -d"
+
+  # Stop containers
+  down:
+    cmds:
+      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} stop"
+
+
   stop:
     desc: "Stop and remove Docker Compose infrastructure  and application services"
     cmds:
       - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} stop"
-      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} down"
+      #- "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} down"
 
   restart:
     desc: "Restart Docker Compose infrastructure and application services"

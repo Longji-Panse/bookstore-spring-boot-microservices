@@ -14,10 +14,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          memory: 500m
+    mem_limit: 500m
     volumes:
       - catalog_db_data:/var/lib/postgresql/data
 
@@ -35,10 +32,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          memory: 500m
+    mem_limit: 500m
     volumes:
       - orders_db_data:/var/lib/postgresql/data
 
@@ -56,10 +50,7 @@ services:
       interval: 30s
       timeout: 30s
       retries: 10
-    deploy:
-      resources:
-        limits:
-          memory: 500m
+    mem_limit: 500m
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
