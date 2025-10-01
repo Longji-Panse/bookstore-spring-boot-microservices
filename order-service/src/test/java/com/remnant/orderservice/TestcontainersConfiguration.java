@@ -23,4 +23,6 @@ class TestcontainersConfiguration {
     RabbitMQContainer rabbitContainer() {
         return new RabbitMQContainer(DockerImageName.parse("rabbitmq:3.12.11-management"));
     }
+
+    // change
 }
