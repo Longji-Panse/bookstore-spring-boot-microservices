@@ -11,7 +11,22 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
+
     services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U testuser -d testdb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
       rabbitmq:
         image: rabbitmq:3.12.11-management
         ports:
@@ -22,9 +37,16 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     env:
       working-directory: ./order-service
       DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/bookstore-order-service
+      SPRING_PROFILES_ACTIVE: ci
+      TESTCONTAINERS_ENABLED: false
+      POSTGRES_URL: jdbc:postgresql://localhost:5432/testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+
     defaults:
       run:
         working-directory: ${{ env.working-directory }}
@@ -44,8 +66,6 @@ jobs:
 
       - name: Build & Run Tests
         run: ./mvnw -ntp verify -Dspring.profiles.active=ci
-        env:
-          TESTCONTAINERS_ENABLED: false
 
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Login to Docker Hub
