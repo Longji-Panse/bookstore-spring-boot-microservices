@@ -25,7 +25,7 @@ public class OrderEventEntity {
     @Enumerated(EnumType.STRING)
     private OrderEventType eventType;
 
-    @Column(columnDefinition = "TEXT",nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String payload;
 
     @Column(name = "created_at", nullable = false, updatable = false)
