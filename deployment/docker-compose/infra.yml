@@ -36,6 +36,25 @@ services:
     volumes:
       - orders_db_data:/var/lib/postgresql/data
 
+  notifications-db:
+    image: postgres:17
+    container_name: notifications-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "35432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    volumes:
+      - notifications_db_data:/var/lib/postgresql/data
+
+
   bookstore-rabbitmq:
     image: rabbitmq:3.12.11-management
     container_name: bookstore-rabbitmq
@@ -54,7 +73,15 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
 volumes:
   catalog_db_data:
   orders_db_data:
+  notifications_db_data:
   rabbitmq_data:
