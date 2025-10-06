@@ -6,7 +6,7 @@ spring:
     password: guest
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
+    url: jdbc:postgresql://localhost:35432/testdb
     username: testuser
     password: testpass
     driver-class-name: org.postgresql.Driver
