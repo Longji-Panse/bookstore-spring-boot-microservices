@@ -30,6 +30,7 @@ tasks:
       - "{{.MVNW}} -pl catalog-service spring-boot:build-image -DskipTests"
       - "{{.MVNW}} -pl order-service spring-boot:build-image -DskipTests"
       - "{{.MVNW}} -pl notification-service spring-boot:build-image -DskipTests"
+      - "{{.MVNW}} -pl api-gateway spring-boot:build-image -DskipTests"
 
     # 🎯 Build only order-service
   build-order:
@@ -54,6 +55,14 @@ tasks:
     cmds:
       - "{{.MVNW}} clean package -pl notification-service -am -DskipTests"
       - "{{.MVNW}} -pl notification-service spring-boot:build-image -DskipTests"
+
+  # 🎯 Build only api-gateway
+  build-api-gateway:
+    desc: "Build only api-gateway"
+    deps: [ format ]
+    cmds:
+      - "{{.MVNW}} clean package -pl api-gateway -am -DskipTests"
+      - "{{.MVNW}} -pl api-gateway spring-boot:build-image -DskipTests"
 
 
   start:
