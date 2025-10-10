@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd8ead99-92bb-4761-9d60-e3872877c909" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/catalog-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/catalog-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog-service/src/main/java/com/remnant/catalogservice/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/catalog-service/src/main/java/com/remnant/catalogservice/config/WebMvcConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +142,7 @@
       <workItem from="1760103176517" duration="1743000" />
       <workItem from="1760104983649" duration="598000" />
       <workItem from="1760105631946" duration="14000" />
-      <workItem from="1760105772099" duration="8847000" />
+      <workItem from="1760105772099" duration="8944000" />
     </task>
     <servers />
   </component>
